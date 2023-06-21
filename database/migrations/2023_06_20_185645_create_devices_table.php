@@ -13,6 +13,23 @@ return new class extends Migration
     {
         Schema::create('devices', function (Blueprint $table) {
             $table->id();
+
+            $table->unsignedBigInteger('branch_id');
+
+            $table->foreign('branch_id')->references('id')
+                ->on('branches')
+                ->onDelete('cascade');
+
+
+            $table->string('status');
+
+            $table->string('box_number');
+            $table->string('serial_number');
+            $table->string('mac_address');
+
+            $table->date('registered_date');
+            $table->date('sold_date')->nullable();
+
             $table->timestamps();
         });
     }

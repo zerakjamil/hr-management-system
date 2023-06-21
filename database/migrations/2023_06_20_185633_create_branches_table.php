@@ -13,6 +13,15 @@ return new class extends Migration
     {
         Schema::create('branches', function (Blueprint $table) {
             $table->id();
+
+            $table->unsignedBigInteger('warehouse_id');
+
+            $table->foreign('warehouse_id')->references('id')
+                ->on('warehouses')
+                ->onDelete('cascade');
+
+            $table->string('name');
+            $table->string('address');
             $table->timestamps();
         });
     }

@@ -8,10 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Warehouse extends Model
 {
     use HasFactory;
-    
-    protected $fillable = ['name', 'location'];
 
-    public function branches()
+    protected $guarded = ['id'];
+
+    public function branches(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Branch::class);
     }

@@ -2,33 +2,38 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+
+
 
 class AuthController extends Controller
 {
-    public function authenticate(Request $request)
+    public function createToken(): \Illuminate\Http\JsonResponse
     {
-        $credentials = $request->only('email', 'password');
 
-        if ($this->isValidCredentials($credentials)) {
-            $token = $this->generateToken();
-            return response()->json(['token' => $token]);
+        $credentials = request()->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+            'device_name' => 'required'
+        ]);
+
+        $deviceName = $credentials['device_name'];
+        unset($credentials['device_name']);
+
+        if (auth()->attempt($credentials)) {
+            $user = auth()->user();
+            $token = $user->createToken($deviceName)->plainTextToken;
+
+            return response()->json([
+                'status' => 'success',
+                'token' => $token
+            ], 200);
         }
 
-        return response()->json(['error' => 'Invalid credentials'], 401);
+        return response()->json([
+            'status' => 'error',
+            'message' => 'Invalid credentials'
+        ], 401);
     }
 
-    private function isValidCredentials($credentials)
-    {
 
-        $validEmail = 'admin@example.com';
-        $validPassword = 'password';
-
-        return $credentials['email'] === $validEmail && $credentials['password'] === $validPassword;
-    }
-
-    private function generateToken()
-    {
-        return 'dummy_token';
-    }
 }

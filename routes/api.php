@@ -1,8 +1,12 @@
 <?php
 
+use App\Http\Controllers\DeviceController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\API\WarehouseController;
+use App\Http\Controllers\API\BranchController;
+use App\Http\Controllers\AuthController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -14,28 +18,26 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+
+
+Route::post('/token/create', [AuthController::class,'createToken']);
+
+
+Route::middleware('auth:sanctum')->group(function () {
+
+    //Protected Area
+
+    Route::get('/user', [UserController::class,'getUserInfo']);
+
+    Route::apiResource('warehouses', WarehouseController::class)
+    ->middleware('can:superadmin');
+
+    Route::get('branches/{branch}', [BranchController::class, 'show']);
+    Route::apiResource('warehouses.branches', BranchController::class)->only('index');
+    Route::apiResource('warehouses.devices', DeviceController::class)->only('index');
+
+    Route::get('devices/search', [DeviceController::class, 'search'])->name('devices.search');
+    Route::get('devices/{device}/status', [DeviceController::class, 'getStatus'])->name('devices.status');
+
 });
 
-
-Route::post('/login', [AuthController::class,'login']);
-
-Route::group(['middleware' => 'auth:api'], function () {
-
-    Route::get('/warehouses', [WarehouseController::class, 'index']);
-    Route::post('/warehouses', [WarehouseController::class, 'store']);
-    Route::get('/warehouses/{id}', [WarehouseController::class, 'show']);
-    Route::put('/warehouses/{id}', [WarehouseController::class, 'update']);
-    Route::delete('/warehouses/{id}', [WarehouseController::class, 'destroy']);
-
-
-    Route::get('/warehouses/{warehouseId}/branches', [BranchController::class , 'index']);
-    Route::post('/warehouses/{warehouseId}/branches', [BranchController::class , 'store']);
-    Route::get('/branches/{id}', [BranchController::class , 'show']);
-    Route::put('/branches/{id}', [BranchController::class , 'update']);
-    Route::delete('/branches/{id}', [BranchController::class , 'destroy']);
-
-    Route::post('/branches/{branchId}/devices', [DeviceController::class , 'store']);
-    Route::delete('/branches/{branchId}/devices/{deviceId}', [DeviceController::class, 'destroy']);
-});
