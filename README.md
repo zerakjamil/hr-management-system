@@ -38,3 +38,6 @@ Notes:
 -The first user is zirak@gmail.com with password of password, it have the permissions of Super Admin.
 
 -An example of databaes file is included in the project hr-management-system\storage\app directory for testing the db export.
+
+-A copy of portman collection is included in the project root directory , Also you can find the documentation through this url:
+https://documenter.getpostman.com/view/28087875/2s93z3gReX
