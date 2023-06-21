@@ -1,11 +1,5 @@
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
 
 Hr Management Application - Gateway Assignment.
 
@@ -26,7 +20,7 @@ Laravel sail is installed, edit as necessary and run.
 Postman Collection
 
 Can is included in the root of the project.
-Or can be found here https://documenter.getpostman.com/view/18062098/2s93Jus2Su (this is recommended to use as it holds the environment variables).
+Or can be found here https://documenter.getpostman.com/view/28087875/2s93z3gReX (this is recommended to use as it holds the environment variables).
 The postman collection comes with an environment file, make sure that one is selected, update the host value as needed if you decide to run it locally and when you generate a token it will automatically save it in the environment for you, then you can either navigate to dashboard folder or user folder to start making requests to the application.
 
 Notes:
@@ -39,5 +33,3 @@ Notes:
 
 -An example of databaes file is included in the project hr-management-system\storage\app directory for testing the db export.
 
--A copy of portman collection is included in the project root directory , Also you can find the documentation through this url:
-https://documenter.getpostman.com/view/28087875/2s93z3gReX
