@@ -30,8 +30,11 @@ Or can be found here https://documenter.getpostman.com/view/18062098/2s93Jus2Su 
 The postman collection comes with an environment file, make sure that one is selected, update the host value as needed if you decide to run it locally and when you generate a token it will automatically save it in the environment for you, then you can either navigate to dashboard folder or user folder to start making requests to the application.
 
 Notes:
--The api response format follows the JSend standards, This was more suitable for this project.
+-The api response format follows the JSend standards, This was more suitable for this project.                                                                        
 -The super admin can manage all the warehouses.
+
 -The branches and the devices are stored indivisually in the database.
+
 -The first user is Zirak@example.com with password of password, it have the permissions of Super Admin.
+
 -An example of databaes file is included in the project hr-management-system\storage\app directory for testing the db export.
