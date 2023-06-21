@@ -35,6 +35,6 @@ Notes:
 
 -The branches and the devices are stored indivisually in the database.
 
--The first user is Zirak@example.com with password of password, it have the permissions of Super Admin.
+-The first user is zirak@gmail.com with password of password, it have the permissions of Super Admin.
 
 -An example of databaes file is included in the project hr-management-system\storage\app directory for testing the db export.
