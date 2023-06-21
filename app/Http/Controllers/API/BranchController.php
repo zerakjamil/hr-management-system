@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\Branch;
+use App\Models\Device;
 use App\Models\Warehouse;
 use Illuminate\Http\Request;
 
@@ -29,8 +30,17 @@ class BranchController extends Controller
         ]);
     }
 
-    public function show(Branch $branch)
+    public function show(Branch $branch): \Illuminate\Http\JsonResponse
     {
+
+        $soldDevicesCount = Device::where('branch_id', $branch->id)
+            ->whereNotNull('sold_date')
+            ->count();
+
+        $remainingDevicesCount = Device::where('branch_id', $branch->id)
+            ->whereNull('sold_date')
+            ->count();
+
 
         return response()->json([
             'status' => 'success',
@@ -40,7 +50,9 @@ class BranchController extends Controller
                 'name' => $branch->name,
                 'address' => $branch->address,
                 'profileLogo' => 'branch-logo.jpg',
-                'created_at' => $branch->created_at
+                'sold' => $soldDevicesCount,
+                'remaining' => $remainingDevicesCount,
+                'created_at' => $branch->created_at,
 
             ], 200]);
     }

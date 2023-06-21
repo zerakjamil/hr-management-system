@@ -24,7 +24,7 @@ class DeviceFactory extends Factory
             'mac_address' => fake()->macAddress,
             'serial_number' => fake()->randomNumber(5),
             'registered_date' => today(),
-            'sold_date' => null,
+            'sold_date' => fake()->randomElement([null, today()]),
         ];
     }
 }
